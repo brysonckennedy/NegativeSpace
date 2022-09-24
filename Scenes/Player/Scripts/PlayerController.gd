@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 var ShipVelocity : Vector2 = Vector2.ZERO
+var Gravity = 0
+
 
 
 
