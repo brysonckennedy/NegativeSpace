@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://TestSceneAlex.gd" type="Script" id=1]
 
 [sub_resource type="ParticlesMaterial" id=1]
 flag_disable_z = true
@@ -8,9 +10,15 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 345.28
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+damping = 100.0
+angle = 534.7
+angle_random = 1.0
+scale = 10.77
+scale_random = 1.0
 
 [node name="TestSceneAlex" type="Particles2D"]
 amount = 32
 explosiveness = 0.98
 randomness = 1.0
 process_material = SubResource( 1 )
+script = ExtResource( 1 )
