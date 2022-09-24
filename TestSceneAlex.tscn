@@ -1,3 +1,16 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 345.28
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
 
 [node name="TestSceneAlex" type="Particles2D"]
+amount = 32
+explosiveness = 0.98
+randomness = 1.0
+process_material = SubResource( 1 )
