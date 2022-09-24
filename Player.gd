@@ -25,8 +25,8 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	var input = Vector2.ZERO
-	input.x = Input.get_axis("move_left", "move_right")
-	input.y = Input.get_axis("move_up", "move_down")
+	input.x = Input.get_axis("MoveLeft", "MoveRight")
+	input.y = Input.get_axis("MoveUp", "MoveDown")
 	input = input.normalized()
 	
 	match state:
