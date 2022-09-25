@@ -1,20 +1,18 @@
 extends KinematicBody2D
-class_name Bullet
+class_name ChargeShot
 
 onready var hitEffect: = preload("res://Projectiles/HitEffect.tscn")
 
-export var SPEED: = 1000
+export var SPEED: = 800
 
 var velocity = Vector2.RIGHT
 var amount = 3
 
 func _process(delta):
 	move_and_collide(velocity.normalized() * SPEED * delta)
-	
 
 func kill()->void:
 	create_hit_effect()
-	queue_free()
 
 func create_hit_effect():
 	var main = get_tree().current_scene

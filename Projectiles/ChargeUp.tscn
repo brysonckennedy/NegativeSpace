@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Projectiles/Particles2D.gd" type="Script" id=1]
+
+[sub_resource type="CurveTexture" id=1]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.32716, 0.454955 ), 0.0, 0.0, 0, 0, Vector2( 0.996914, 0.869369 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 40.0
+orbit_velocity = 1.0
+orbit_velocity_random = 0.0
+orbit_velocity_curve = SubResource( 1 )
+linear_accel = 7.49
+radial_accel = 23.05
+damping = 26.51
+angle = 45.0
+scale = 3.0
+scale_curve = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 0 ), 0.0, 11.8842, 0, 0, Vector2( 0.236111, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.998457, 0.207207 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 30.0
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = -100.0
+angle = 45.0
+scale_curve = SubResource( 8 )
+
+[node name="ChargeUp" type="Particles2D"]
+emitting = false
+amount = 100
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 4 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+emitting = false
+amount = 32
+one_shot = true
+randomness = 1.0
+process_material = SubResource( 7 )
+script = ExtResource( 1 )

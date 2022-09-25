@@ -29,7 +29,12 @@ func small_damage():
 	animationPlayer.play("Damage")
 	if HP <= 0:
 		die()
-	
+
+func big_damage():
+	HP -= 3
+	animationPlayer.play("Damage")
+	if HP <= 0:
+		die()
 
 func _on_SlidingEnemy_body_entered(body) -> void:
 	if body is Player and body.hitbox_active == true:
@@ -38,3 +43,5 @@ func _on_SlidingEnemy_body_entered(body) -> void:
 	elif body is Bullet:
 		body.kill()
 		small_damage()
+	elif body is ChargeShot:
+		big_damage()

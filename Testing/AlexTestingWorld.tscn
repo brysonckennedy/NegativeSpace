@@ -28,6 +28,3 @@ bus = "Music"
 
 [node name="EnergyPickup" parent="." instance=ExtResource( 4 )]
 position = Vector2( 537, 401 )
-
-[node name="ChargeTime" type="Timer" parent="."]
-wait_time = 2.0
