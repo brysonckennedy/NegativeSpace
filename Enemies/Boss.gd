@@ -3,7 +3,11 @@ extends Area2D
 var count : int = 0
 
 onready var explosion: = preload("res://Projectiles/Explosion.tscn")
+onready var missile: = preload("res://Projectiles/BossMissile.tscn")
 onready var damage = 25
+
+onready var coreMissle: = $CoreMissile
+onready var MissileLaunchPosition: Position2D = $CoreMissile/MissileLaunchPosition
 
 export var HP_CoreBullet = 3
 export var HP_CoreMissile = 3
@@ -16,7 +20,10 @@ var hitCoreLaser = false
 
 func _process(delta: float) -> void:
 	count += 1
-	if count >= 180:
+	print(count)
+	if count >= 1200:
+		print("hit 1200")
+		shoot_missile()
 		count = 0
 
 func die() -> void:
@@ -26,6 +33,13 @@ func die() -> void:
 	SoundPlayer.play_sound(SoundPlayer.ENEMY_DESTROYED)
 	explosion_fx.global_position = global_position
 	queue_free()
+	
+func shoot_missile() -> void:
+	print("firing missile")
+	var FireMissile = missile.instance()
+	var main = get_tree().current_scene
+	main.add_child(FireMissile)
+	FireMissile.position = MissileLaunchPosition.global_position
 
 func small_damage():
 	if hitCoreBullet and HP_CoreBullet > 0:

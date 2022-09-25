@@ -13,6 +13,7 @@ radius = 36.0
 radius = 36.0555
 
 [node name="Boss" type="Area2D"]
+position = Vector2( 145, 229 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -41,19 +42,22 @@ shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="CoreMissile"]
 modulate = Color( 0.00784314, 0.588235, 0.113725, 1 )
-position = Vector2( -12, 123 )
+position = Vector2( -13, 123 )
 texture = ExtResource( 1 )
+
+[node name="MissileLaunchPosition" type="Position2D" parent="CoreMissile"]
+position = Vector2( -64, 124 )
 
 [node name="CoreLaser" type="Area2D" parent="."]
 position = Vector2( 28, 11 )
 
 [node name="CoreLaserHitbox" type="CollisionShape2D" parent="CoreLaser"]
-position = Vector2( -44, -11 )
+position = Vector2( -43, -11 )
 shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="CoreLaser"]
 modulate = Color( 0.0901961, 0, 0.870588, 1 )
-position = Vector2( -44, -10 )
+position = Vector2( -44, -11 )
 texture = ExtResource( 1 )
 
 [connection signal="body_entered" from="CoreBullet" to="." method="_on_CoreBullet_body_entered"]
