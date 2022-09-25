@@ -11,8 +11,12 @@ var amount = 3
 func _process(delta):
 	move_and_collide(velocity.normalized() * SPEED * delta)
 
+func spark()->void:
+	create_hit_effect()
+
 func kill()->void:
 	create_hit_effect()
+	queue_free()
 
 func create_hit_effect():
 	var main = get_tree().current_scene

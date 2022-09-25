@@ -48,19 +48,21 @@ func small_damage():
 	if HP <= 0:
 		die()
 
+func destroy_shield():
+	SHIELD = false
+	animationPlayer.play("Damage")
+	if shift == true:
+		animationPlayer.play("BlueCore")
+	elif !shift:
+		animationPlayer.play("RedCore")
+
+
+
 func big_damage():
-	if SHIELD == true:
-		SHIELD = false
-		animationPlayer.play("Damage")
-		if shift == true:
-			animationPlayer.play("BlueCore")
-		elif !shift:
-			animationPlayer.play("RedCore")
-	elif !SHIELD:
-		HP -= 3
-		animationPlayer.play("Damage")
-		if HP <= 0:
-			die()
+	HP -= 3
+	animationPlayer.play("Damage")
+	if HP <= 0:
+		die()
 
 func _on_SlidingEnemy_body_entered(body) -> void:
 	if body is Player and body.hitbox_active == true:
@@ -69,10 +71,16 @@ func _on_SlidingEnemy_body_entered(body) -> void:
 		
 	elif body is Bullet and SHIELD:
 		body.kill()
+		SoundPlayer.play_sound(SoundPlayer.SHIELDHIT)
 		
 	elif body is Bullet and !SHIELD:
 		body.kill()
 		small_damage()
 		
-	elif body is ChargeShot:
+	elif body is ChargeShot and SHIELD:
+		body.kill()
+		destroy_shield()
+	
+	elif body is ChargeShot and !SHIELD:
+		body.spark()
 		big_damage()
