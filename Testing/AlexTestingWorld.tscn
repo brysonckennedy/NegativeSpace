@@ -42,4 +42,7 @@ bus = "Music"
 position = Vector2( 1674, 442 )
 
 [node name="ChasingEnemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 828, 476 )
+position = Vector2( 984, 413 )
+
+[node name="ChasingEnemy2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2353, 397 )

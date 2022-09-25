@@ -2,7 +2,7 @@ extends Area2D
 
 onready var explosion: = preload("res://Projectiles/Explosion.tscn")
 onready var animationPlayer: = $AnimationPlayer
-onready var damage = 25
+onready var damage = 30
 
 export(float) var SPEED = 100.0
 export var HP = 3

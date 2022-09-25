@@ -4,12 +4,16 @@ var speed = 200
 var motion = Vector2.ZERO
 var player = null
 var isSpotted = false
+var shift = false
 export(float) var SPEED = 6000.0
 onready var explosion: = preload("res://Projectiles/Explosion.tscn")
 onready var animationPlayer: = $AnimationPlayer
-onready var damage = 25
+onready var damage = 10
 export var HP = 3
-	
+
+func _ready():
+	Events.connect("shift", self, "_on_shift")
+
 func _physics_process(delta):
 	motion = Vector2.ZERO
 	
@@ -28,13 +32,27 @@ func die() -> void:
 	explosion_fx.global_position = global_position
 	queue_free()
 
+func _on_shift():
+	if shift == true:
+		shift = false
+	elif shift == false:
+		shift = true
+
 func _on_SightLine_body_entered(body):
 	if body is Player:
 		player = body
+	if shift:
+		animationPlayer.play("BlueOnSight")
+	else:
+		animationPlayer.play("RedOnSight")
 
 
 func _on_SightLine_body_exited(body):
 	player = null
+	if shift:
+		animationPlayer.play("Blue")
+	else:
+		animationPlayer.play("Red")
 
 func small_damage():
 	HP -= 1
