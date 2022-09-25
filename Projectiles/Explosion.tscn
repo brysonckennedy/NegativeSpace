@@ -31,6 +31,7 @@ scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
 [node name="Explosion" type="Particles2D"]
+z_index = 20
 emitting = false
 amount = 32
 lifetime = 0.8

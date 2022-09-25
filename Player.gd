@@ -8,6 +8,8 @@ enum {
 	MAX_CHARGE
 }
 
+
+
 export var MAX_SPEED: = 1000000
 export var CMAX_SPEED: = 500000
 export var ACCELERATION: = 100000
@@ -19,6 +21,8 @@ export var hitbox_active: = true
 
 onready var bullet: = preload("res://Projectiles/Bullet.tscn")
 onready var charge_shot: = preload("res://Projectiles/ChargeShot.tscn")
+
+onready var WINDOW_SIZE: Vector2  = get_viewport_rect().size
 
 onready var idleParticles:= $IdleParticles
 onready var moveParticles:= $MoveParticles
@@ -48,6 +52,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not player_ready:
 		return
+	
+	position.x = clamp(position.x, 16, WINDOW_SIZE.x - 64)
+	position.y = clamp(position.y, 8, WINDOW_SIZE.y - 8)
 	
 	var input = Vector2.ZERO
 	input.x = Input.get_axis("MoveLeft", "MoveRight")
@@ -156,6 +163,7 @@ func shoot_charge_shot(delta):
 func quantum_shift():
 	Events.emit_signal("shift")
 	SoundPlayer.play_sound(SoundPlayer.QUANTUMSHIFT)
+	clear_color()
 	if shift == true:
 		shift = false
 	else:
@@ -209,3 +217,8 @@ func charge_sound_loop():
 	if not chargeHoldSound.playing:
 		chargeHoldSound.play()
 
+func clear_color():
+	if shift == true:
+		VisualServer.set_default_clear_color(Color8(234, 110, 170, 1))
+	else:
+		VisualServer.set_default_clear_color(Color8(110, 184, 234, 1))

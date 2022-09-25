@@ -17,11 +17,11 @@ func listen_quantum_shift():
 	Events.connect("shift", self, "_on_quantum_shift")
 
 func _on_quantum_shift():
-	if shift == false:
-		shift = true
+	if shift == true:
+		shift = false
 		print(shift)
+		animationPlayer.play("RESET")
 		self_modulate.a = 0.50
-		animationPlayer.play("ColorShiftBlue")
 		z_index = 0
 		print(z_index)
 		set_tileset(load("res://Level/Tiles/BackTiles.tres"))
@@ -29,11 +29,12 @@ func _on_quantum_shift():
 		set_collision_layer_bit(3, 1)
 		set_collision_mask_bit(0, 0)
 
-	elif shift == true:
-		shift = false
+	elif shift == false:
+		shift = true
 		print(shift)
+		animationPlayer.play("ColorShiftBlue")
 		self_modulate.a = 1.00
-		animationPlayer.play("RESET")
+
 		z_index = 5
 		print(z_index)
 		set_tileset(load("res://Level/Tiles/FrontTiles.tres"))

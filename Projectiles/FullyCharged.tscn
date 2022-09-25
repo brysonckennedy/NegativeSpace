@@ -54,6 +54,7 @@ angle = 45.0
 scale_curve = SubResource( 6 )
 
 [node name="FullyCharged" type="Particles2D"]
+z_index = 20
 emitting = false
 process_material = SubResource( 9 )
 

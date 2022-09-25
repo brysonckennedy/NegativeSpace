@@ -1,8 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Projectiles/Particles2D.gd" type="Script" id=1]
 
+[sub_resource type="Curve" id=9]
+min_value = -500.0
+max_value = 500.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
 [sub_resource type="CurveTexture" id=1]
+curve = SubResource( 9 )
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.32716, 0.454955 ), 0.0, 0.0, 0, 0, Vector2( 0.996914, 0.869369 ), 0.0, 0.0, 0, 0 ]
@@ -46,6 +52,7 @@ angle = 45.0
 scale_curve = SubResource( 8 )
 
 [node name="ChargeUp" type="Particles2D"]
+z_index = 20
 emitting = false
 amount = 100
 one_shot = true

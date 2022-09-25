@@ -40,7 +40,7 @@ color_ramp = SubResource( 2 )
 extents = Vector2( 21.5, 14 )
 
 [node name="ChargeShot" type="KinematicBody2D"]
-z_index = 12
+z_index = 20
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 1 )

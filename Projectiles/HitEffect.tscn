@@ -20,6 +20,7 @@ scale = 2.0
 scale_curve = SubResource( 2 )
 
 [node name="HitEffect" type="Particles2D"]
+z_index = 20
 emitting = false
 amount = 5
 lifetime = 0.2
