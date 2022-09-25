@@ -6,6 +6,7 @@ onready var hitEffect: = preload("res://Projectiles/HitEffect.tscn")
 export var SPEED: = 1000
 
 var velocity = Vector2.RIGHT
+var amount = 1
 
 func _process(delta):
 	move_and_collide(velocity.normalized() * SPEED * delta)

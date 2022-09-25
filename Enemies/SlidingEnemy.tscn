@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/SlidingEnemy.gd" type="Script" id=2]
@@ -7,8 +7,36 @@
 radius = 32.0624
 
 [sub_resource type="Animation" id=2]
-resource_name = "SineWave"
-length = 5.0
+resource_name = "Damage"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 100, 100, 100, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="SlidingEnemy" type="Area2D"]
 script = ExtResource( 2 )
@@ -20,7 +48,8 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/SineWave = SubResource( 2 )
+anims/Damage = SubResource( 2 )
+anims/RESET = SubResource( 3 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
