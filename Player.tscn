@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Player/PlayerShip.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 23, 10 )
@@ -186,5 +187,8 @@ anims/Invulnerability = SubResource( 11 )
 anims/RESET = SubResource( 12 )
 anims/Rest = SubResource( 13 )
 
+[node name="HUD" parent="." instance=ExtResource( 3 )]
+
+[connection signal="health_updated" from="." to="HUD/Control" method="_on_Player_health_updated"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_InvulnerabilityTimer_timeout"]

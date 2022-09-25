@@ -20,6 +20,7 @@ onready var tween: = $Tween
 onready var invulnerabilityTimer: = $InvulnerabilityTimer
 onready var effectsAnimation: = $EffectsAnimation
 onready var collisionShape2D: = $CollisionShape2D
+onready var healthBar: = $HUD/Control
 
 onready var health: = max_health setget _set_health
 
@@ -29,6 +30,7 @@ var velocity: = Vector2.ZERO
 
 func _ready() -> void:
 	spawn()
+	$"/root/Global".register_player(self)
 
 func _physics_process(delta: float) -> void:
 	if not player_ready:
@@ -82,6 +84,7 @@ func player_damage(amount) -> void:
 	if invulnerabilityTimer.is_stopped():
 		invulnerabilityTimer.start()
 		_set_health(health - amount)
+		healthBar.set_value(float(health)/max_health * 100)
 		effectsAnimation.play("DamageTaken")
 		effectsAnimation.queue("Invulnerability")
 		
