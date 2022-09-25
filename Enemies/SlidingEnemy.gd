@@ -6,16 +6,34 @@ onready var damage = 25
 
 export(float) var SPEED = 100.0
 export var HP = 3
+export var SHIELD = true
+
+var shift = false
 
 func _ready() -> void:
 	add_to_group("enemies")
+	Events.connect("shift", self, "_on_shift")
 
 func _process(delta: float) -> void:
 	position.x -= SPEED * delta
 
 func _on_VisibilityNotifier2D_screen_exited() -> void:
 	queue_free()
-	
+
+func _on_shift():
+	if shift == false:
+		shift = true
+		if SHIELD:
+			animationPlayer.play("BlueShield")
+		else:
+			animationPlayer.play("BlueCore")
+	elif shift == true:
+		shift = false
+		if SHIELD:
+			animationPlayer.play("RedShield")
+		else:
+			animationPlayer.play("RedCore")
+
 func die() -> void:
 	var main = get_tree().current_scene
 	var explosion_fx = explosion.instance()
@@ -31,17 +49,30 @@ func small_damage():
 		die()
 
 func big_damage():
-	HP -= 3
-	animationPlayer.play("Damage")
-	if HP <= 0:
-		die()
+	if SHIELD == true:
+		SHIELD = false
+		animationPlayer.play("Damage")
+		if shift == true:
+			animationPlayer.play("BlueCore")
+		elif !shift:
+			animationPlayer.play("RedCore")
+	elif !SHIELD:
+		HP -= 3
+		animationPlayer.play("Damage")
+		if HP <= 0:
+			die()
 
 func _on_SlidingEnemy_body_entered(body) -> void:
 	if body is Player and body.hitbox_active == true:
 		body.player_damage(damage)
 		die()
-	elif body is Bullet:
+		
+	elif body is Bullet and SHIELD:
+		body.kill()
+		
+	elif body is Bullet and !SHIELD:
 		body.kill()
 		small_damage()
+		
 	elif body is ChargeShot:
 		big_damage()
