@@ -63,6 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="NegativeSpace"
+run/main_scene="res://Level/MainLevel.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -74,6 +75,7 @@ RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
 Events="*res://Events.gd"
 Global="*res://Global.gd"
 SoundPlayer="*res://Audio/SoundPlayer.tscn"
+MusicPlayers="*res://Audio/Music/MusicPlayers.tscn"
 
 [editor]
 

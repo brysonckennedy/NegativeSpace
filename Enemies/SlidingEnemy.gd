@@ -8,6 +8,8 @@ export(float) var SPEED = 100.0
 export var HP = 3
 export var SHIELD = true
 
+var score_value1 = 1000
+var score_value2 = 2000
 var shift = false
 
 func _ready() -> void:
@@ -40,6 +42,7 @@ func die() -> void:
 	main.add_child(explosion_fx)
 	SoundPlayer.play_sound(SoundPlayer.ENEMY_DESTROYED)
 	explosion_fx.global_position = global_position
+	Global.score += score_value2
 	queue_free()
 
 func small_damage():
@@ -51,6 +54,7 @@ func small_damage():
 func destroy_shield():
 	SHIELD = false
 	animationPlayer.play("Damage")
+	Global.score += score_value1
 	if shift == true:
 		animationPlayer.play("BlueCore")
 	elif !shift:

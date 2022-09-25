@@ -8,8 +8,6 @@ enum {
 	MAX_CHARGE
 }
 
-
-
 export var MAX_SPEED: = 1000000
 export var CMAX_SPEED: = 500000
 export var ACCELERATION: = 100000
@@ -182,7 +180,7 @@ func heal(amount) -> void:
 
 func die() -> void:
 	Events.emit_signal("player_died")
-	queue_free()
+	get_tree().reload_current_scene()
 
 func _set_health(value):
 	var prev_health = health
