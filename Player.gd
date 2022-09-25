@@ -44,6 +44,8 @@ func _physics_process(delta: float) -> void:
 	input.y = Input.get_axis("MoveUp", "MoveDown")
 	input = input.normalized()
 	
+	print(position)
+	
 	match state:
 		MOVE: move_state(input, delta)
 	
