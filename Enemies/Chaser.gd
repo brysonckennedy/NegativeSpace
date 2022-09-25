@@ -11,6 +11,8 @@ onready var animationPlayer: = $AnimationPlayer
 onready var damage = 10
 export var HP = 3
 
+var score_value = 2500
+
 func _ready():
 	Events.connect("shift", self, "_on_shift")
 
@@ -30,6 +32,7 @@ func die() -> void:
 	main.add_child(explosion_fx)
 	SoundPlayer.play_sound(SoundPlayer.ENEMY_DESTROYED)
 	explosion_fx.global_position = global_position
+	Global.score += score_value
 	queue_free()
 
 func _on_shift():
