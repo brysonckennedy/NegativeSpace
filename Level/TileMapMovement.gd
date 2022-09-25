@@ -29,7 +29,7 @@ func _on_quantum_shift():
 		shift = false
 		print(shift)
 		self_modulate.a = 1.00
-		z_index = 10
+		z_index = 5
 		print(z_index)
 		set_tileset(load("res://Level/Tiles/FrontTiles.tres"))
 		set_collision_layer_bit(2, 1)

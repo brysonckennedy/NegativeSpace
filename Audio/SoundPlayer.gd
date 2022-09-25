@@ -5,6 +5,7 @@ const SMALL_LASER = preload("res://Audio/SFX/small_laser2.wav")
 const ENEMY_DESTROYED = preload("res://Audio/SFX/enemy_destroyed.wav")
 const CHARGE = preload("res://Audio/SFX/ChargeUpSFX.wav")
 const CHARGESHOT = preload("res://Audio/SFX/charge_shot.wav")
+const QUANTUMSHIFT = preload("res://Audio/SFX/quantum_shift.wav")
 
 onready var audioPlayers = $AudioPlayers
 

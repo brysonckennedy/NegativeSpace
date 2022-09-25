@@ -155,7 +155,7 @@ func shoot_charge_shot(delta):
 
 func quantum_shift():
 	Events.emit_signal("shift")
-	SoundPlayer.play_sound(SoundPlayer.CHARGESHOT)
+	SoundPlayer.play_sound(SoundPlayer.QUANTUMSHIFT)
 	if shift == true:
 		shift = false
 	else:
