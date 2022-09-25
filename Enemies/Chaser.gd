@@ -6,8 +6,9 @@ var player = null
 var isSpotted = false
 export(float) var SPEED = 6000.0
 onready var explosion: = preload("res://Projectiles/Explosion.tscn")
+onready var animationPlayer: = $AnimationPlayer
 onready var damage = 25
-
+export var HP = 3
 	
 func _physics_process(delta):
 	motion = Vector2.ZERO
@@ -28,11 +29,24 @@ func die() -> void:
 	queue_free()
 
 func _on_SightLine_body_entered(body):
-	player = body
+	if body is Player:
+		player = body
 
 
 func _on_SightLine_body_exited(body):
 	player = null
+
+func small_damage():
+	HP -= 1
+	animationPlayer.play("Damage")
+	if HP <= 0:
+		die()
+
+func big_damage():
+	HP -= 3
+	animationPlayer.play("Damage")
+	if HP <= 0:
+		die()
 
 func _on_Hitbox_body_entered(body):
 	if body is Player: #and body.hitbox_active == true:
@@ -40,7 +54,9 @@ func _on_Hitbox_body_entered(body):
 		die()
 	elif body is Bullet:
 		body.kill()
-		die()
+		small_damage()
+	elif body is ChargeShot:
+		big_damage()
 
 
 
