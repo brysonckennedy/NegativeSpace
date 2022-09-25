@@ -84,10 +84,12 @@ func player_damage(amount) -> void:
 	if invulnerabilityTimer.is_stopped():
 		invulnerabilityTimer.start()
 		_set_health(health - amount)
-		healthBar.set_value(float(health)/max_health * 100)
+
 		effectsAnimation.play("DamageTaken")
 		effectsAnimation.queue("Invulnerability")
-		
+
+func heal(amount) -> void:
+	_set_health(health + amount)
 
 func die() -> void:
 	Events.emit_signal("player_died")
@@ -97,6 +99,7 @@ func _set_health(value):
 	var prev_health = health
 	health = clamp(value, 0, max_health)
 	if health != prev_health:
+		healthBar.set_value(float(health)/max_health * 100)
 		emit_signal("health_updated", health)
 		if health == 0:
 			die()
