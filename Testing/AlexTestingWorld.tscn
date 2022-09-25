@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Enemies/SlidingEnemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/Boss.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Audio/Music/NegativeSpaceTheme.wav" type="AudioStream" id=3]
 [ext_resource path="res://Pickups/EnergyPickup.tscn" type="PackedScene" id=4]
@@ -9,18 +9,6 @@
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
-[node name="SlidingEnemy" parent="." instance=ExtResource( 1 )]
-position = Vector2( 656, 200 )
-
-[node name="SlidingEnemy2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 873, 95 )
-
-[node name="SlidingEnemy3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1087, 204 )
-
-[node name="SlidingEnemy4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1261, 113 )
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 autoplay = true
@@ -28,3 +16,6 @@ bus = "Music"
 
 [node name="EnergyPickup" parent="." instance=ExtResource( 4 )]
 position = Vector2( 537, 401 )
+
+[node name="Boss" parent="." instance=ExtResource( 1 )]
+position = Vector2( 987, 292 )

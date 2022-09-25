@@ -53,8 +53,6 @@ func _physics_process(delta: float) -> void:
 	input.y = Input.get_axis("MoveUp", "MoveDown")
 	input = input.normalized()
 	
-	print(position)
-	
 	match state:
 		MOVE: move_state(input, delta)
 		MAX_CHARGE: max_charge_state(input, delta)
