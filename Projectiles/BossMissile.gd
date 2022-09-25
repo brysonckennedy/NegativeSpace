@@ -9,6 +9,11 @@ onready var explosion: = preload("res://Projectiles/Explosion.tscn")
 onready var animationPlayer: = $AnimationPlayer
 onready var damage = 25
 export var HP = 3
+
+# ----- GENERAL NOTES -----
+# 
+# - will probably have same problem of losing tracking when shifting
+# - will fly straight again after losing tracking which looks a bit odd, but it might just be how it is
 	
 func _physics_process(delta):
 	motion = Vector2.ZERO

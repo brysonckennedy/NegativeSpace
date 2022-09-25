@@ -18,13 +18,16 @@ var hitCoreBullet = false
 var hitCoreMissile = false
 var hitCoreLaser = false
 
+# ----- GENERAL NOTES -----
+# 
+# - 
+
 func _process(delta: float) -> void:
 	count += 1
 	print(count)
-	if count >= 1200:
+	if count % 1200: #count is the amount of frames since start. BK computer is 240fps so this is 5 seconds, needs to be made for all systems or at least assume monitor is 60fps
 		print("hit 1200")
 		shoot_missile()
-		count = 0
 
 func die() -> void:
 	var main = get_tree().current_scene
@@ -84,6 +87,12 @@ func big_damage():
 	if HP_Total <= 0:
 		#die()
 		print("Boss Died")
+
+
+
+#------These functions check if hit by bullet and deal damage to core. cores have a total HP and each core has its own hp. All cores must die to triger death
+#------death can be found in the damage functions under HP_Total <= 0 near bottom.
+#------lots 
 
 func _on_CoreBullet_body_entered(body):
 	print("Bullet hit CB")
