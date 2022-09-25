@@ -39,6 +39,7 @@ onready var health: = max_health setget _set_health
 var player_ready: = false
 var state: = MOVE
 var velocity: = Vector2.ZERO
+var shift: = false
 
 func _ready() -> void:
 	spawn()
@@ -52,6 +53,9 @@ func _physics_process(delta: float) -> void:
 	input.x = Input.get_axis("MoveLeft", "MoveRight")
 	input.y = Input.get_axis("MoveUp", "MoveDown")
 	input = input.normalized()
+	
+	if Input.is_action_just_pressed("Shift"):
+		quantum_shift()
 	
 	match state:
 		MOVE: move_state(input, delta)
@@ -148,6 +152,14 @@ func shoot_charge_shot(delta):
 	SoundPlayer.play_sound(SoundPlayer.CHARGESHOT)
 	fullyCharged.emitting = false
 	state = MOVE
+
+func quantum_shift():
+	Events.emit_signal("shift")
+	SoundPlayer.play_sound(SoundPlayer.CHARGESHOT)
+	if shift == true:
+		shift = false
+	else:
+		shift = true
 
 func player_damage(amount) -> void:
 	if invulnerabilityTimer.is_stopped():

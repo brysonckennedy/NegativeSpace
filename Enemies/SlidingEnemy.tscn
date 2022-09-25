@@ -39,6 +39,7 @@ tracks/0/keys = {
 }
 
 [node name="SlidingEnemy" type="Area2D"]
+z_index = 11
 collision_layer = 2
 script = ExtResource( 2 )
 
