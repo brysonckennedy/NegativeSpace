@@ -14,6 +14,8 @@ export var DECELERATION: = 5
 export var max_health: = 100
 export var hitbox_active: = true
 
+onready var bullet: = preload("res://Projectiles/Bullet.tscn")
+
 onready var idleParticles:= $IdleParticles
 onready var moveParticles:= $MoveParticles
 onready var tween: = $Tween
@@ -21,6 +23,7 @@ onready var invulnerabilityTimer: = $InvulnerabilityTimer
 onready var effectsAnimation: = $EffectsAnimation
 onready var collisionShape2D: = $CollisionShape2D
 onready var healthBar: = $HUD/Control
+onready var shotPosition: Position2D = $ShotPosition
 
 onready var health: = max_health setget _set_health
 
@@ -71,6 +74,9 @@ func move_state(input, delta) -> void:
 		idleParticles.emitting = false
 		moveParticles.emitting = true
 	
+	if Input.is_action_just_pressed("Shoot"):
+		shoot(delta)
+	
 	move_and_slide(velocity * delta)
 	
 
@@ -79,6 +85,14 @@ func apply_decceleration(delta):
 
 func moving(input):
 	return input != Vector2.ZERO
+
+func shoot(delta)->void:
+	
+	var shoot = bullet.instance()
+	var main = get_tree().current_scene
+	main.add_child(shoot)
+	shoot.position = shotPosition.global_position
+	SoundPlayer.play_sound(SoundPlayer.SMALL_LASER)
 
 func player_damage(amount) -> void:
 	if invulnerabilityTimer.is_stopped():
@@ -100,7 +114,7 @@ func _set_health(value):
 	health = clamp(value, 0, max_health)
 	if health != prev_health:
 		healthBar.set_value(float(health)/max_health * 100)
-		emit_signal("health_updated", health)
+#		emit_signal("health_updated", health)
 		if health == 0:
 			die()
 

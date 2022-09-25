@@ -10,4 +10,5 @@ func _process(delta: float) -> void:
 func _on_EnergyPickup_body_entered(body):
 	if body is Player:
 		body.heal(amount)
+		SoundPlayer.play_sound(SoundPlayer.ENERGY_PICKUP)
 		queue_free()

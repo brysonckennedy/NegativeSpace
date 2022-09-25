@@ -1,5 +1,6 @@
 extends Area2D
 
+onready var explosion: = preload("res://Projectiles/Explosion.tscn")
 onready var damage = 25
 
 export(float) var SPEED = 100.0
@@ -15,9 +16,16 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 	
 func die() -> void:
 	var main = get_tree().current_scene
+	var explosion_fx = explosion.instance()
+	main.add_child(explosion_fx)
+	SoundPlayer.play_sound(SoundPlayer.ENEMY_DESTROYED)
+	explosion_fx.global_position = global_position
 	queue_free()
 	
 func _on_SlidingEnemy_body_entered(body) -> void:
 	if body is Player and body.hitbox_active == true:
 		body.player_damage(damage)
+		die()
+	elif body is Bullet:
+		body.kill()
 		die()

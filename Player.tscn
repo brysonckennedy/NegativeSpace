@@ -189,6 +189,9 @@ anims/Rest = SubResource( 13 )
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 
+[node name="ShotPosition" type="Position2D" parent="."]
+position = Vector2( 60, 0 )
+
 [connection signal="health_updated" from="." to="HUD/Control" method="_on_Player_health_updated"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_InvulnerabilityTimer_timeout"]

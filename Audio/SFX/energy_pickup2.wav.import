@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/energy_pickup2.wav-a5dd41e0a78e73d1ab2d60ce301fd2c3.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/energy_pickup2.wav"
+dest_files=[ "res://.import/energy_pickup2.wav-a5dd41e0a78e73d1ab2d60ce301fd2c3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
