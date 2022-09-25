@@ -53,8 +53,6 @@ func _physics_process(delta: float) -> void:
 	input.y = Input.get_axis("MoveUp", "MoveDown")
 	input = input.normalized()
 	
-	print(position)
-	
 	match state:
 		MOVE: move_state(input, delta)
 		MAX_CHARGE: max_charge_state(input, delta)
@@ -95,6 +93,8 @@ func move_state(input, delta) -> void:
 		shoot(delta)
 		chargeUp.emitting = false
 	
+	ground_collide()
+	
 	
 	move_and_slide(velocity * delta)
 
@@ -112,11 +112,11 @@ func max_charge_state(input, delta) -> void:
 		velocity = velocity.limit_length(CMAX_SPEED * delta)
 		idleParticles.emitting = false
 		moveParticles.emitting = true
-		print("charged")
 	
 	if Input.is_action_just_released("Shoot"):
 		shoot_charge_shot(delta)
 	
+	ground_collide()
 	
 	move_and_slide(velocity * delta)
 
@@ -172,6 +172,10 @@ func _set_health(value):
 #		emit_signal("health_updated", health)
 		if health == 0:
 			die()
+
+func ground_collide():
+	if is_on_wall():
+		die()
 
 func disable_hitbox():
 	hitbox_active = false

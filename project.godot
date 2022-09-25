@@ -126,10 +126,18 @@ Shoot={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemy"
+2d_physics/layer_3="World active"
+2d_physics/layer_4="World inactive"
+
 [physics]
 
 common/enable_pause_aware_picking=true
 
 [rendering]
 
+environment/default_clear_color=Color( 0.917647, 0.431373, 0.666667, 1 )
 environment/default_environment="res://default_env.tres"
