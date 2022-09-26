@@ -10,11 +10,17 @@ onready var animationPlayer: = $AnimationPlayer
 onready var damage = 25
 export var HP = 3
 
+var direction = Vector2.RIGHT
+
 # ----- GENERAL NOTES -----
 # 
 # - will probably have same problem of losing tracking when shifting
 # - will fly straight again after losing tracking which looks a bit odd, but it might just be how it is
-	
+
+func _ready():
+	direction = direction.normalized()
+	look_at(global_position + direction)
+
 func _physics_process(delta):
 	motion = Vector2.ZERO
 	

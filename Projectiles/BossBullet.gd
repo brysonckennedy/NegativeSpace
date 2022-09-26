@@ -5,7 +5,7 @@ var damage = 10
 var hasFoundPlayer = false
 
 func _process(delta):
-	look_at(get_global_transform(player.position))
+	look_at(get_global_transform(), player.position)
 	
 
 

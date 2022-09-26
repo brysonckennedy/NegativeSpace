@@ -6,6 +6,7 @@ signal health_updated(health)
 enum {
 	MOVE,
 	MAX_CHARGE
+	DIE
 }
 
 export var MAX_SPEED: = 1000000
@@ -16,6 +17,7 @@ export var DECELERATION: = 5
 export var CDECELERATION: = 1
 export var max_health: = 100
 export var hitbox_active: = true
+export var DAMAGE_TICK: = 5
 
 onready var bullet: = preload("res://Projectiles/Bullet.tscn")
 onready var charge_shot: = preload("res://Projectiles/ChargeShot.tscn")
@@ -35,6 +37,9 @@ onready var fullyCharged: = $FullyCharged
 onready var chargeTimer: = $ChargeTimer
 onready var chargeHoldSound: = $ChargeHoldSound
 onready var chargingSound: = $ChargingSound
+onready var collideAlarm: = $CollideAlarm
+onready var dotTimer: = $DOTTimer
+onready var animationPlayer: = $Label/AnimationPlayer
 
 onready var health: = max_health setget _set_health
 
@@ -42,6 +47,7 @@ var player_ready: = false
 var state: = MOVE
 var velocity: = Vector2.ZERO
 var shift: = false
+var fighting_boss = false
 
 func _ready() -> void:
 	spawn()
@@ -65,6 +71,7 @@ func _physics_process(delta: float) -> void:
 	match state:
 		MOVE: move_state(input, delta)
 		MAX_CHARGE: max_charge_state(input, delta)
+		DIE: death_state(delta)
 	
 
 func spawn() -> void:
@@ -99,7 +106,7 @@ func move_state(input, delta) -> void:
 		if not chargingSound.playing:
 			chargingSound.play()
 	if Input.is_action_just_released("Shoot"):
-		shoot(delta)
+		shoot()
 		chargeUp.emitting = false
 	
 	ground_collide()
@@ -138,7 +145,7 @@ func apply_cdecceleration(delta):
 func moving(input):
 	return input != Vector2.ZERO
 
-func shoot(delta)->void:
+func shoot()->void:
 	chargingSound.stop()
 	chargeTimer.stop()
 	var shoot = bullet.instance()
@@ -175,12 +182,14 @@ func player_damage(amount) -> void:
 		effectsAnimation.play("DamageTaken")
 		effectsAnimation.queue("Invulnerability")
 
+func player_damage_no_invul(amount) -> void:
+	_set_health(health - amount)
+
 func heal(amount) -> void:
 	_set_health(health + amount)
 
 func die() -> void:
 	Events.emit_signal("player_died")
-	get_tree().reload_current_scene()
 
 func _set_health(value):
 	var prev_health = health
@@ -189,11 +198,20 @@ func _set_health(value):
 		healthBar.set_value(float(health)/max_health * 100)
 #		emit_signal("health_updated", health)
 		if health == 0:
-			die()
+			state = DIE
 
 func ground_collide():
 	if is_on_wall():
-		die()
+		if dotTimer.time_left <= 0:
+			dotTimer.start()
+		effectsAnimation.play("DamageTaken")
+		animationPlayer.play("dangershift")
+		if !collideAlarm.playing:
+			collideAlarm.play()
+	if !is_on_wall():
+		animationPlayer.play("Invisible")
+		collideAlarm.stop()
+
 
 func disable_hitbox():
 	hitbox_active = false
@@ -220,3 +238,17 @@ func clear_color():
 		VisualServer.set_default_clear_color(Color8(234, 110, 170, 1))
 	else:
 		VisualServer.set_default_clear_color(Color8(110, 184, 234, 1))
+
+
+func _on_DOTTimer_timeout():
+	if is_on_wall():
+		if dotTimer.time_left <= 0:
+			self.player_damage_no_invul(DAMAGE_TICK)
+			print(health)
+			dotTimer.start()
+
+func death_state(delta):
+	if !fighting_boss:
+		get_tree().change_scene("res://Scenes/MenusandInterface/RegularDeath.tscn")
+	if fighting_boss:
+		get_tree().change_scene("res://Scenes/MenusandInterface/Boss Death Screen.tscn")

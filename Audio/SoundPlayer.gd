@@ -7,6 +7,7 @@ const CHARGE = preload("res://Audio/SFX/ChargeUpSFX.wav")
 const CHARGESHOT = preload("res://Audio/SFX/charge_shot.wav")
 const QUANTUMSHIFT = preload("res://Audio/SFX/quantum_shift.wav")
 const SHIELDHIT = preload("res://Audio/SFX/ShieldHit.wav")
+const BOSSDEATH = preload("res://Audio/SFX/BossDeath.wav")
 
 onready var audioPlayers = $AudioPlayers
 

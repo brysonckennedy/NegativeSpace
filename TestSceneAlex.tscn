@@ -1,41 +1,32 @@
 [gd_scene load_steps=3 format=2]
 
-[sub_resource type="ParticlesMaterial" id=1]
-flag_disable_z = true
-direction = Vector3( 0, 0, 0 )
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 345.28
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 100.0
-angle = 534.7
-angle_random = 1.0
-scale = 10.77
-scale_random = 1.0
+[ext_resource path="res://Enemies/Boss.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 
-[sub_resource type="GDScript" id=2]
-script/source = "extends Particles2D
+[node name="Node2D" type="Node2D"]
 
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( -838, -374 )
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
+[node name="Boss" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1208, 394 )
 
+[node name="CoreBullet" parent="Boss/Cores" index="0"]
+position = Vector2( 1208, 394 )
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+[node name="CoreMissile" parent="Boss/Cores" index="1"]
+position = Vector2( 1204, 396 )
 
+[node name="CoreLaser" parent="Boss/Cores" index="2"]
+position = Vector2( 1236, 405 )
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-"
+[node name="Shield" parent="Boss/Shields" index="0"]
+position = Vector2( 1184, 395 )
 
-[node name="TestSceneAlex" type="Particles2D"]
-amount = 32
-explosiveness = 0.98
-randomness = 1.0
-process_material = SubResource( 1 )
-script = SubResource( 2 )
+[node name="Shield2" parent="Boss/Shields" index="1"]
+position = Vector2( 1184, 291 )
+
+[node name="Shield3" parent="Boss/Shields" index="2"]
+position = Vector2( 1184, 491 )
+
+[editable path="Boss"]

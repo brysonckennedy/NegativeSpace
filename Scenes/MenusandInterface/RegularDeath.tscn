@@ -1,0 +1,119 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Assets/UI/Fonts/XRacerCondensedItalic-9wz5.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/UI/Fonts/MADEOkineSansPERSONALUSE-Regular.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/UI/Fonts/new_dynamicfont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://MainMenu2.gd" type="Script" id=4]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 3 )
+
+[sub_resource type="Theme" id=2]
+default_font = ExtResource( 3 )
+
+[sub_resource type="Theme" id=3]
+default_font = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 133
+outline_size = 13
+outline_color = Color( 0, 0.552941, 0.921569, 1 )
+extra_spacing_bottom = -50
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 24
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 7 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=9]
+default_font = SubResource( 8 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MainMenu" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 99.0
+margin_top = -258.0
+margin_right = 650.0
+
+[node name="StartButton" type="Button" parent="MainMenu/VBoxContainer"]
+margin_right = 551.0
+margin_bottom = 57.0
+theme = SubResource( 1 )
+text = "TRY AGAIN"
+
+[node name="OptionsButton" type="Button" parent="MainMenu/VBoxContainer"]
+visible = false
+margin_top = 61.0
+margin_right = 551.0
+margin_bottom = 118.0
+theme = SubResource( 2 )
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer"]
+margin_top = 61.0
+margin_right = 551.0
+margin_bottom = 118.0
+theme = SubResource( 3 )
+text = "Quit"
+
+[node name="Title" type="Label" parent="MainMenu"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -779.0
+margin_top = 69.0
+margin_right = -123.0
+margin_bottom = 342.0
+theme = SubResource( 5 )
+text = "You
+DIED"
+
+[node name="Label2" type="Label" parent="MainMenu"]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -910.0
+margin_top = -65.0
+theme = SubResource( 6 )
+text = "A Game By Alexander Van Stralendorff and Bryson Kennedy"
+align = 2
+
+[node name="Label3" type="Label" parent="MainMenu"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -910.0
+margin_top = -32.5
+margin_bottom = 32.5
+rect_pivot_offset = Vector2( 304, 65 )
+theme = SubResource( 9 )
+text = "Controls:
+'WASD / ARROW KEYS' to move
+'SPACE' to shoot (hold for charge shot)
+'SHIFT' TO QUANTUM SHIFT"
+align = 2
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/StartButton" to="MainMenu" method="_on_StartButton_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/OptionsButton" to="MainMenu" method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/QuitButton" to="MainMenu" method="_on_QuitButton_pressed"]

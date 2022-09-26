@@ -9,3 +9,6 @@ onready var musicPlayer = $MusicPlayer
 func play_song(song):
 		musicPlayer.stream = song
 		musicPlayer.play()
+
+func _on_MusicPlayer_finished():
+		musicPlayer.play()
