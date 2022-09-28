@@ -38,7 +38,7 @@ var coreMissleDied = false
 var coreLaserDied = false
 
 # ----- GENERAL NOTES -----
-# 
+# - Test comment
 # - 
 
 func _ready():
